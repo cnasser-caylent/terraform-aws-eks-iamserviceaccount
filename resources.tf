@@ -23,8 +23,8 @@ resource "aws_iam_role" "role_service_account" {
                 },
                 "Action": "sts:AssumeRoleWithWebIdentity",
                 "Condition": {
-                    "StringEquals": {
-                        "${var.oidc_provider}:sub": "system:serviceaccount:${var.service_account_namespace}:${var.service_account_name}"
+                    "StringLike": {
+                        "${var.oidc_provider}:sub": "system:serviceaccount:${var.service_account_namespace}:${var.service_account_name}-*"
                     }
                 }
             }
