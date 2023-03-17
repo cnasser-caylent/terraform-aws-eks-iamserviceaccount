@@ -49,3 +49,12 @@ resource "kubernetes_service_account" "service_account" {
     }
 
 }
+
+resource "kubernetes_namespace" "namespace_name" {
+  metadata {
+    annotations = {
+      name = var.service_account_namespace
+    }
+    name = var.service_account_namespace
+  }
+}
