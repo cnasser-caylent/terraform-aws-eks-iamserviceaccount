@@ -47,9 +47,4 @@ resource "kubernetes_service_account" "service_account" {
         }
         namespace = var.service_account_namespace
     }
-  
-    depends_on = [
-      kubernetes_namespace.namespace_name
-    ]  
-
 }
