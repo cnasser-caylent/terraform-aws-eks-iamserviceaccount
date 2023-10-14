@@ -12,26 +12,26 @@ resource "aws_iam_policy" "policy_service_account" {
 
 resource "aws_iam_role" "role_service_account" {
     name = var.iam_role_name
-    assume_role_policy = <<POLICY
-    {
-        "Version": "2012-10-17",
-        "Statement" : [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "Federated": "arn:aws:iam::${local.account_id}:oidc-provider/${var.oidc_provider}"
-                },
-                "Action": "sts:AssumeRoleWithWebIdentity",
-                "Condition": {
-                    "StringEquals": {
-                        "${var.oidc_provider}:aud": "sts.amazonaws.com",
-                        "${var.oidc_provider}:sub": "system:serviceaccount:${var.service_account_namespace}:${var.service_account_name}"
-                    }
+    assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::${local.account_id}:oidc-provider/${var.oidc_provider}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "${var.oidc_provider}:aud": "sts.amazonaws.com",
+                    "${var.oidc_provider}:sub": "system:serviceaccount:${var.service_account_namespace}:${var.service_account_name}"
                 }
             }
-        ]
-    }
-POLICY
+        }
+    ]
+}
+EOF
 }
 
 resource "aws_iam_role_policy_attachment" "policy_attachment_service_account" {
