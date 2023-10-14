@@ -40,13 +40,12 @@ resource "aws_iam_role_policy_attachment" "policy_attachment_service_account" {
     role = aws_iam_role.role_service_account.name
 }
 
-resource "kubernetes_service_account" "service_account" {
-    metadata {
-        name = "${var.service_account_name}"
-        annotations = {
-            "eks.amazonaws.com/role-arn" = aws_iam_role.role_service_account.arn
-        }
-        namespace = var.service_account_namespace
-    }
-
-}
+#resource "kubernetes_service_account" "service_account" {
+#    metadata {
+#        name = "${var.service_account_name}"
+#        annotations = {
+#            "eks.amazonaws.com/role-arn" = aws_iam_role.role_service_account.arn
+#        }
+#        namespace = var.service_account_namespace
+#    }
+#}
