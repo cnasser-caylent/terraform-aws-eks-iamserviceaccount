@@ -40,6 +40,12 @@ resource "aws_iam_role_policy_attachment" "policy_attachment_service_account" {
     role = aws_iam_role.role_service_account.name
 }
 
+resource "aws_iam_openid_connect_provider" "this" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = var.cluster_thumprint_list
+  url             = var.cluster_oidc_issuer
+}
+
 #resource "kubernetes_service_account" "service_account" {
 #    metadata {
 #        name = "${var.service_account_name}"
