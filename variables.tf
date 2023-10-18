@@ -28,3 +28,13 @@ variable "oidc_provider" {
     type = string
     description = "OIDC provider without https://"
 }
+
+variable "cluster_thumprint_list" {
+    type = list(string)
+    description = "OIDC provider without https://"
+}
+
+variable "cluster_oidc_issuer" {
+    type = string
+    description = "OIDC provider without https://"
+}
